@@ -1,33 +1,50 @@
 package com.learning.retrofitsampleapi
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.learning.retrofitsampleapi.Models.Post
 import com.learning.retrofitsampleapi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: PostAdapter
+    private var newPost = mutableListOf<Post>()
 
-//    private lateinit var button: Button
     companion object {
         private val TAG = MainActivity::class.java.simpleName
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding =ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.i(TAG, "onCreate: check")
 
-//        button = findViewById(R.id.button)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        adapter = PostAdapter(this, newPost)
+        binding.rvPosts.adapter = adapter
+        binding.rvPosts.layoutManager = LinearLayoutManager(this)
+
+        viewModel.posts.observe(this, Observer { posts ->
+
+            Log.i(TAG, "Number of posts: ${posts.size}")
+            adapter.updatePosts(posts)
+        })
+
         binding.button.setOnClickListener {
-            viewModel.getPosts()
+            viewModel.fetchAndLogPosts()
+        }
+        binding.user.setOnClickListener {
+            val intent = Intent(this@MainActivity,UserActivity::class.java)
+            startActivity(intent)
         }
     }
-
 }

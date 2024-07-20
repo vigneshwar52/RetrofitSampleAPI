@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel :ViewModel() {
     private val api = RetrofitInstance.retrofit
+    private lateinit var PostAdapter:PostAdapter
+
     companion object {
         private val TAG = MainViewModel::class.java.simpleName
     }
@@ -20,11 +22,15 @@ class MainViewModel :ViewModel() {
     private val _isLoading = MutableLiveData(false)
     val isLoading :LiveData<Boolean> get() = _isLoading
 
-    fun getPosts(){
+    fun fetchAndLogPosts(page: Int = 1, limit: Int = 10) {
         viewModelScope.launch {
-          val fetchPost = RetrofitInstance.retrofit.getPosts()
-            Log.i(TAG, "getPosts: fetched posts :$fetchPost")
-            _posts.value = fetchPost
+            try {
+                val fetchedPosts = RetrofitInstance.retrofit.getPosts(page, limit)
+                Log.i(TAG, "Number of posts fetched: ${fetchedPosts.size}")
+                _posts.value = fetchedPosts
+            } catch (e: Exception) {
+                Log.e(TAG, "Error fetching posts", e)
+            }
         }
     }
 }
