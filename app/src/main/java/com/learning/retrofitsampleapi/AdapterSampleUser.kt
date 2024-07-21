@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.retrofitsampleapi.Models.User
 
-class AdapterSampleUser(val context: Context, val user:List<User>) :
+class AdapterSampleUser(val context: Context, var user:List<User>) :
     RecyclerView.Adapter<AdapterSampleUser.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterSampleUser.MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_user,parent,false)
@@ -21,6 +21,11 @@ class AdapterSampleUser(val context: Context, val user:List<User>) :
 
     override fun getItemCount(): Int {
         return user.size
+    }
+
+    fun updateUserData(userList:List<User>){
+        user = userList
+        notifyDataSetChanged()
     }
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){

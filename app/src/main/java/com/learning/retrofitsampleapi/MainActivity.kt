@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
         binding.rvPosts.adapter = adapter
         binding.rvPosts.layoutManager = LinearLayoutManager(this)
 
-        viewModel.posts.observe(this, Observer { posts ->
+        binding.button.setOnClickListener {
+            viewModel.fetchAndLogPosts()
+        }
 
+        viewModel.posts.observe(this, Observer { posts ->
             Log.i(TAG, "Number of posts: ${posts.size}")
             adapter.updatePosts(posts)
         })
 
-        binding.button.setOnClickListener {
-            viewModel.fetchAndLogPosts()
-        }
         binding.user.setOnClickListener {
             val intent = Intent(this@MainActivity,UserActivity::class.java)
             startActivity(intent)
