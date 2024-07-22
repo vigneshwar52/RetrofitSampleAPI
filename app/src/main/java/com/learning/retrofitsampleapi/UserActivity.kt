@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.learning.retrofitsampleapi.Adapters.UserAdapter
 import com.learning.retrofitsampleapi.Models.User
 import com.learning.retrofitsampleapi.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserBinding
-    private lateinit var userAdapter: AdapterSampleUser
+    private lateinit var userAdapter: UserAdapter
     private var userNew = mutableListOf<User>()
     private lateinit var viewModel: UserViewModel
 
@@ -22,7 +23,7 @@ class UserActivity : AppCompatActivity() {
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userAdapter = AdapterSampleUser(this@UserActivity,userNew)
+        userAdapter = UserAdapter(this@UserActivity,userNew)
         binding.userRecView.adapter = userAdapter
         binding.userRecView.layoutManager = LinearLayoutManager(this)
 

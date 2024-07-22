@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.learning.retrofitsampleapi.Adapters.PostAdapter
 import com.learning.retrofitsampleapi.Api.RetrofitInstance
 import com.learning.retrofitsampleapi.Models.Post
 import kotlinx.coroutines.launch
 
 class MainViewModel :ViewModel() {
     private val api = RetrofitInstance.retrofit
-    private lateinit var PostAdapter:PostAdapter
+    private lateinit var PostAdapter: PostAdapter
 
     companion object {
         private val TAG = MainViewModel::class.java.simpleName

@@ -1,4 +1,4 @@
-package com.learning.retrofitsampleapi
+package com.learning.retrofitsampleapi.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.retrofitsampleapi.Models.User
+import com.learning.retrofitsampleapi.R
 
-class AdapterSampleUser(val context: Context, var user:List<User>) :
-    RecyclerView.Adapter<AdapterSampleUser.MyViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterSampleUser.MyViewHolder {
+class UserAdapter(val context: Context, var user:List<User>) :
+    RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_user,parent,false)
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AdapterSampleUser.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding(user[position])
     }
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.learning.retrofitsampleapi.Adapters.PostAdapter
 import com.learning.retrofitsampleapi.Models.Post
 import com.learning.retrofitsampleapi.databinding.ActivityMainBinding
 
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        adapter = PostAdapter(this, newPost)
+        //To Initialize and Configure recyclerView Adapter
+        adapter = PostAdapter(this, listOf())
         binding.rvPosts.adapter = adapter
         binding.rvPosts.layoutManager = LinearLayoutManager(this)
 

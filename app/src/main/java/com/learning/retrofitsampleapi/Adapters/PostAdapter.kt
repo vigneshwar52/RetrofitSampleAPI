@@ -1,4 +1,4 @@
-package com.learning.retrofitsampleapi
+package com.learning.retrofitsampleapi.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.learning.retrofitsampleapi.Models.Post
+import com.learning.retrofitsampleapi.R
 
 class PostAdapter(val context:Context,var posts:List<Post>) : RecyclerView.Adapter<PostAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
