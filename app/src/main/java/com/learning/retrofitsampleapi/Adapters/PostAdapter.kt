@@ -9,7 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.learning.retrofitsampleapi.Models.Post
 import com.learning.retrofitsampleapi.R
 
-class PostAdapter(val context:Context,var posts:List<Post>) : RecyclerView.Adapter<PostAdapter.MyViewHolder>() {
+class PostAdapter(
+    private val context:Context,
+    private var posts:List<Post>,
+    private val itemClickListener:ItemClickListener
+) : RecyclerView.Adapter<PostAdapter.MyViewHolder>() {
+
+    interface ItemClickListener {
+        fun onItemClick(post: Post)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_view,parent,false)
         return MyViewHolder(view)
@@ -34,9 +42,12 @@ class PostAdapter(val context:Context,var posts:List<Post>) : RecyclerView.Adapt
         private val tvBody:TextView = itemView.findViewById(R.id.tvBlogBody)
 
         fun bind(post:Post){
-            tvId.text = "Post "+post.id.toString()
+            tvId.text = "Post #${post.id}"
             tvTitle.text = post.title
             tvBody.text = post.body
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(post)
+            }
         }
     }
 }

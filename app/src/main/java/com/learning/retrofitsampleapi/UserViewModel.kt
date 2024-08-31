@@ -14,11 +14,16 @@ class UserViewModel : ViewModel() {
     private val _postsUser: MutableLiveData<List<User>> = MutableLiveData();
     val postUser : LiveData<List<User>> get() = _postsUser
 
-    fun fetchUserData(){
-        viewModelScope.launch {
-            val fetchDetails = RetrofitInstance.retrofit.getUserPost()
-            Log.i(TAG, "fetchUserData: $fetchDetails")
-            _postsUser.value = fetchDetails
+
+    fun fetchUserData() {
+        try {
+            viewModelScope.launch {
+                val fetchDetails = RetrofitInstance.Api.getUserPost()
+                Log.i(TAG, "fetchUserData: $fetchDetails")
+                _postsUser.value = fetchDetails
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "fetchUserData: ", e)
         }
     }
 
