@@ -18,19 +18,35 @@ class MainViewModel :ViewModel() {
         private val TAG = MainViewModel::class.java.simpleName
     }
     private val _posts:MutableLiveData<List<Post>> = MutableLiveData();
-    val posts :LiveData<List<Post>> get() = _posts
+    val posts :LiveData<List<Post>> = _posts
 
-    private val _isLoading = MutableLiveData(false)
-    val isLoading :LiveData<Boolean> get() = _isLoading
+    private var _isLoading = MutableLiveData(false)
+    val isLoading :LiveData<Boolean> = _isLoading
+    private var currentPage:Int = 1;
 
-    fun fetchAndLogPosts(page: Int = 1, limit: Int = 10) {
+    private var _error = MutableLiveData<String?>(null)
+    val fetchError: LiveData<String?> = _error
+
+    fun fetchAndLogPosts() {
         viewModelScope.launch {
             try {
-                val fetchedPosts = RetrofitInstance.retrofit.getPosts(page, limit)
+                _isLoading.value = true
+                _error.value = null
+
+                val fetchedPosts = RetrofitInstance.Api.getPosts(currentPage)
+                currentPage += 1;
                 Log.i(TAG, "Number of posts fetched: ${fetchedPosts.size}")
-                _posts.value = fetchedPosts
+                val currentPosts = _posts.value ?: emptyList()
+                _posts.value = currentPosts + fetchedPosts
+
+                /*//Get all Posts
+                val fetchPosts = RetrofitInstance.Api.getAll()
+                _posts.value = fetchPosts*/
             } catch (e: Exception) {
                 Log.e(TAG, "Error fetching posts", e)
+                _error.value = e.message
+            } finally {
+                _isLoading.value = false
             }
         }
     }

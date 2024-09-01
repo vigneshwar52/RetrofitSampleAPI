@@ -1,5 +1,10 @@
 package com.learning.retrofitsampleapi.Models
 
+import android.os.Parcelable
+import androidx.versionedparcelable.ParcelField
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     val id:Int,
     val name:String,
@@ -7,5 +12,5 @@ data class User(
     val email:String,
     val website:String
 //    val company:Company
-) {
+) : Parcelable {
 }

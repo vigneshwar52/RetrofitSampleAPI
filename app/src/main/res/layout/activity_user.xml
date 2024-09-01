@@ -7,35 +7,39 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".UserActivity">
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginBottom="10dp"
+    android:weightSum="2">
 
     <Button
         android:id="@+id/fetchUser"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="Tap to Fetch User details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/black"/>
+        android:backgroundTint="@color/black"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="Back to Main Activity"
-        app:layout_constraintStart_toEndOf="@+id/fetchUser"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_orange_dark"/>
-
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_weight="1"/>
+</LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRecView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/back"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

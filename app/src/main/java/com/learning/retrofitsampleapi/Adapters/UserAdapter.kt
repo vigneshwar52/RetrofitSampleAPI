@@ -11,6 +11,7 @@ import com.learning.retrofitsampleapi.R
 
 class UserAdapter(val context: Context, var user:List<User>) :
     RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_user,parent,false)
         return MyViewHolder(view)

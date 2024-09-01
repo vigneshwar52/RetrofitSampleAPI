@@ -15,6 +15,12 @@
         android:theme="@style/Theme.RetrofitSampleAPI"
         tools:targetApi="31">
         <activity
+            android:name=".Edit.EditViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserActivity"
             android:exported="false" />
         <activity
